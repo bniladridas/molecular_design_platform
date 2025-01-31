@@ -1,0 +1,42 @@
+# Core Web Framework
+fastapi==0.109.0
+uvicorn==0.25.0
+pydantic==2.6.1
+pydantic-settings==2.1.0
+
+# Database
+sqlalchemy==2.0.25
+alembic==1.13.1
+psycopg2-binary==2.9.9
+
+# Molecular Libraries
+rdkit-pypi==2022.9.5
+numpy==1.24.4
+Pillow==10.4.0
+
+# Task Queue
+celery==5.3.6
+redis==5.0.1
+
+# Authentication
+python-jose==3.3.0
+passlib==1.7.4
+python-multipart==0.0.9
+
+# Background Tasks
+asyncio==3.4.3
+
+# Validation
+email-validator==2.1.1
+
+# Deployment & Monitoring
+sentry-sdk==1.40.6
+
+# Testing
+pytest==7.4.4
+httpx==0.26.0
+asynctest==0.13.0
+
+# Utilities
+python-dotenv==1.0.0
+requests==2.31.0
