@@ -1,3 +1,5 @@
+![mdp](https://github.com/bniladridas/molecular_design_platform/blob/main/mdp.png)
+
 # Molecular Design Platform
 
 ## Overview
