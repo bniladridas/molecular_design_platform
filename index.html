@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JHU Molecular Design Platform</title>
+    <style>
+        :root {
+            --jhu-blue: #002D72;
+            --jhu-blue-dark: #001F4D;
+            --jhu-blue-light: #68ACE5;
+            --jhu-heritage-blue: #005EB8;
+            --jhu-gray: #888B8D;
+            --jhu-light-gray: #F2F2F2;
+            --jhu-black: #000000;
+            --jhu-white: #FFFFFF;
+            --jhu-accent: #7D8C8F;
+        }
+        
+        body {
+            font-family: 'Lato', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--jhu-black);
+            margin: 0;
+            padding: 0;
+            background-color: var(--jhu-white);
+        }
+        
+        header {
+            background: var(--jhu-blue);
+            color: white;
+            padding: 2rem 0;
+            border-bottom: 5px solid var(--jhu-blue-light);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        .hero-buttons {
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            margin: 0 0.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--jhu-heritage-blue);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--jhu-blue-light);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--jhu-heritage-blue);
+            color: var(--jhu-white);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--jhu-heritage-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--jhu-blue);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: var(--jhu-blue-light);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid var(--jhu-blue);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--jhu-blue);
+            padding: 1.5rem 0;
+            text-align: center;
+            background-color: var(--jhu-light-gray);
+        }
+        
+        .feature-content {
+            padding: 1.5rem;
+        }
+        
+        .feature-content h3 {
+            color: var(--jhu-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .workflow {
+            background-color: var(--jhu-light-gray);
+            padding: 4rem 0;
+        }
+        
+        .workflow-diagram {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .molecule-visuals {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .molecule-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid var(--jhu-blue-light);
+        }
+        
+        .molecule-img {
+            height: 200px;
+            background-color: var(--jhu-light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .molecule-content {
+            padding: 1.5rem;
+        }
+        
+        .code-block {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            overflow-x: auto;
+            border-left: 4px solid var(--jhu-blue);
+        }
+        
+        .code-block pre {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        footer {
+            background-color: var(--jhu-blue);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 5px solid var(--jhu-blue-light);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--jhu-white);
+            margin: 0 1rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--jhu-blue-light);
+        }
+        
+        /* Molecule Structure Visualization */
+        .molecule-structure {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        
+        .atom {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            position: relative;
+        }
+        
+        .atom-c {
+            background-color: #333333;
+        }
+        
+        .atom-h {
+            background-color: #f0f0f0;
+            color: #333;
+            width: 30px;
+            height: 30px;
+        }
+        
+        .atom-o {
+            background-color: #cc0000;
+        }
+        
+        .atom-n {
+            background-color: var(--jhu-blue-light);
+        }
+        
+        .bond {
+            height: 4px;
+            background-color: #666;
+            position: absolute;
+            transform-origin: left center;
+        }
+        
+        /* JHU-specific styles */
+        .jhu-header-logo {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+        
+        .jhu-header-logo h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--jhu-white);
+            margin-left: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .jhu-citation {
+            background-color: #EFEFEF;
+            padding: 2rem 0;
+            border-top: 1px solid #ddd;
+        }
+        
+        .department-info {
+            font-style: italic;
+            color: var(--jhu-white);
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="jhu-header-logo">
+        <div class="container" style="display: flex; align-items: center;">
+            <svg width="50" height="50" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100" height="100" fill="var(--jhu-blue)" />
+                <path d="M20 25H80V75H20V25Z" fill="var(--jhu-white)" />
+                <text x="35" y="60" font-family="serif" font-size="30" font-weight="bold" fill="var(--jhu-blue)">JHU</text>
+            </svg>
+            <h3>Johns Hopkins University</h3>
+        </div>
+    </div>
+    
+    <header>
+        <div class="container">
+            <div class="hero">
+                <h1>Molecular Design Platform</h1>
+                <p>An advanced computational platform for designing, optimizing, and analyzing molecular structures for drug discovery and materials science</p>
+                <div class="department-info">Department of Chemical & Biomolecular Engineering</div>
+                <div class="hero-buttons">
+                    <a href="#features" class="btn btn-primary">Explore Features</a>
+                    <a href="https://github.com/bniladridas/molecular_design_platform" class="btn btn-outline">View on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <section id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Key Features</h2>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">⚗️</div>
+                    <div class="feature-content">
+                        <h3>Molecular Structure Prediction</h3>
+                        <p>Accurately predict 3D molecular structures from SMILES notation using advanced machine learning algorithms.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🧪</div>
+                    <div class="feature-content">
+                        <h3>Property Optimization</h3>
+                        <p>Optimize molecular properties for specific applications including solubility, bioavailability, and binding affinity.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <div class="feature-content">
+                        <h3>Virtual Screening</h3>
+                        <p>Screen large virtual libraries to identify potential lead compounds for drug discovery projects.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-content">
+                        <h3>Data Analysis</h3>
+                        <p>Comprehensive analysis tools for molecular data with visualization capabilities and statistical methods.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <div class="feature-content">
+                        <h3>Automated Workflows</h3>
+                        <p>Create and execute automated workflows for complex molecular design tasks with minimal manual intervention.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <div class="feature-content">
+                        <h3>AI-Driven Design</h3>
+                        <p>Leverage artificial intelligence to generate novel molecular structures with desired properties.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="workflow">
+        <div class="container">
+            <div class="section-title">
+                <h2>Workflow</h2>
+            </div>
+            
+            <div class="workflow-diagram">
+                <svg width="100%" height="200" viewBox="0 0 800 200">
+                    <!-- Workflow diagram -->
+                    <rect x="50" y="70" width="120" height="60" rx="10" fill="var(--jhu-blue)" />
+                    <text x="110" y="105" text-anchor="middle" fill="white" font-size="14">Input Molecule</text>
+                    
+                    <path d="M170 100 L230 100" stroke="var(--jhu-blue-dark)" stroke-width="3" marker-end="url(#arrowhead)" />
+                    
+                    <rect x="230" y="70" width="120" height="60" rx="10" fill="var(--jhu-blue)" />
+                    <text x="290" y="105" text-anchor="middle" fill="white" font-size="14">Structure Prediction</text>
+                    
+                    <path d="M350 100 L410 100" stroke="var(--jhu-blue-dark)" stroke-width="3" marker-end="url(#arrowhead)" />
+                    
+                    <rect x="410" y="70" width="120" height="60" rx="10" fill="var(--jhu-blue)" />
+                    <text x="470" y="105" text-anchor="middle" fill="white" font-size="14">Property Calculation</text>
+                    
+                    <path d="M530 100 L590 100" stroke="var(--jhu-blue-dark)" stroke-width="3" marker-end="url(#arrowhead)" />
+                    
+                    <rect x="590" y="70" width="120" height="60" rx="10" fill="var(--jhu-blue)" />
+                    <text x="650" y="105" text-anchor="middle" fill="white" font-size="14">Optimization</text>
+                    
+                    <!-- Arrow marker definition -->
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="var(--jhu-blue-dark)" />
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <h2>Molecular Visualizations</h2>
+            </div>
+            
+            <div class="molecule-structure">
+                <!-- Simple 3D-like molecule visualization -->
+                <svg width="400" height="300" viewBox="0 0 400 300">
+                    <!-- Carbon ring structure -->
+                    <circle cx="200" cy="150" r="100" fill="none" stroke="var(--jhu-blue)" stroke-width="2" stroke-dasharray="5,5" />
+                    
+                    <!-- Carbon atoms -->
+                    <circle cx="200" cy="50" r="20" fill="#333333" />
+                    <text x="200" y="55" text-anchor="middle" fill="white" font-size="16">C</text>
+                    
+                    <circle cx="287" cy="100" r="20" fill="#333333" />
+                    <text x="287" y="105" text-anchor="middle" fill="white" font-size="16">C</text>
+                    
+                    <circle cx="287" cy="200" r="20" fill="#333333" />
+                    <text x="287" y="205" text-anchor="middle" fill="white" font-size="16">C</text>
+                    
+                    <circle cx="200" cy="250" r="20" fill="#333333" />
+                    <text x="200" y="255" text-anchor="middle" fill="white" font-size="16">C</text>
+                    
+                    <circle cx="113" cy="200" r="20" fill="#333333" />
+                    <text x="113" y="205" text-anchor="middle" fill="white" font-size="16">C</text>
+                    
+                    <circle cx="113" cy="100" r="20" fill="#333333" />
+                    <text x="113" y="105" text-anchor="middle" fill="white" font-size="16">C</text>
+                    
+                    <!-- Oxygen atom -->
+                    <circle cx="200" cy="150" r="20" fill="#cc0000" />
+                    <text x="200" y="155" text-anchor="middle" fill="white" font-size="16">O</text>
+                    
+                    <!-- Bonds -->
+                    <line x1="200" y1="70" x2="200" y2="130" stroke="#666" stroke-width="3" />
+                    <line x1="217" y1="57" x2="270" y2="93" stroke="#666" stroke-width="3" />
+                    <line x1="270" y1="117" x2="217" y2="150" stroke="#666" stroke-width="3" />
+                    <line x1="270" y1="183" x2="217" y2="150" stroke="#666" stroke-width="3" />
+                    <line x1="217" y1="243" x2="270" y2="207" stroke="#666" stroke-width="3" />
+                    <line x1="183" y1="243" x2="130" y2="207" stroke="#666" stroke-width="3" />
+                    <line x1="130" y1="183" x2="183" y2="150" stroke="#666" stroke-width="3" />
+                    <line x1="130" y1="117" x2="183" y2="150" stroke="#666" stroke-width="3" />
+                    <line x1="183" y1="57" x2="130" y2="93" stroke="#666" stroke-width="3" />
+                </svg>
+            </div>
+            
+            <div class="molecule-visuals">
+                <div class="molecule-card">
+                    <div class="molecule-img">
+                        <svg width="200" height="200" viewBox="0 0 200 200">
+                            <!-- Simple molecular structure -->
+                            <circle cx="100" cy="100" r="40" fill="none" stroke="var(--jhu-blue)" stroke-width="2" />
+                            <circle cx="100" cy="60" r="15" fill="var(--jhu-blue-light)" />
+                            <text x="100" y="65" text-anchor="middle" fill="white" font-size="14">N</text>
+                            <circle cx="140" cy="100" r="15" fill="#cc0000" />
+                            <text x="140" y="105" text-anchor="middle" fill="white" font-size="14">O</text>
+                            <circle cx="100" cy="140" r="15" fill="#333333" />
+                            <text x="100" y="145" text-anchor="middle" fill="white" font-size="14">C</text>
+                            <circle cx="60" cy="100" r="15" fill="#333333" />
+                            <text x="60" y="105" text-anchor="middle" fill="white" font-size="14">C</text>
+                            
+                            <!-- Bonds -->
+                            <line x1="100" y1="75" x2="100" y2="125" stroke="#666" stroke-width="2" />
+                            <line x1="115" y1="100" x2="125" y2="100" stroke="#666" stroke-width="2" />
+                            <line x1="75" y1="100" x2="85" y2="100" stroke="#666" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <div class="molecule-content">
+                        <h3>Structure Visualization</h3>
+                        <p>Interactive 3D visualization of molecular structures with customizable display options.</p>
+                    </div>
+                </div>
+                
+                <div class="molecule-card">
+                    <div class="molecule-img">
+                        <svg width="200" height="200" viewBox="0 0 200 200">
+                            <!-- Energy diagram -->
+                            <line x1="40" y1="160" x2="160" y2="160" stroke="#333" stroke-width="2" />
+                            <line x1="40" y1="40" x2="40" y2="160" stroke="#333" stroke-width="2" />
+                            
+                            <!-- Energy levels -->
+                            <rect x="60" y="120" width="30" height="40" fill="var(--jhu-blue)" />
+                            <rect x="100" y="80" width="30" height="80" fill="var(--jhu-blue-light)" />
+                            <rect x="140" y="140" width="30" height="20" fill="var(--jhu-heritage-blue)" />
+                            
+                            <!-- Arrows -->
+                            <path d="M75 110 Q 100 70 115 80" fill="none" stroke="#333" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#energyArrow)" />
+                            <path d="M115 100 Q 130 130 140 140" fill="none" stroke="#333" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#energyArrow)" />
+                            
+                            <!-- Arrow marker -->
+                            <defs>
+                                <marker id="energyArrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+                                </marker>
+                            </defs>
+                            
+                            <!-- Labels -->
+                            <text x="75" y="190" text-anchor="middle" font-size="12">Initial</text>
+                            <text x="115" y="190" text-anchor="middle" font-size="12">Transition</text>
+                            <text x="155" y="190" text-anchor="middle" font-size="12">Final</text>
+                            <text x="30" y="40" text-anchor="end" font-size="12">Energy</text>
+                        </svg>
+                    </div>
+                    <div class="molecule-content">
+                        <h3>Energy Profile Analysis</h3>
+                        <p>Calculate and visualize energy profiles for chemical reactions and conformational changes.</p>
+                    </div>
+                </div>
+                
+                <div class="molecule-card">
+                    <div class="molecule-img">
+                        <svg width="200" height="200" viewBox="0 0 200 200">
+                            <!-- Heat map -->
+                            <rect x="40" y="40" width="120" height="120" fill="none" stroke="#333" stroke-width="1" />
+                            
+                            <!-- Grid cells with varying colors in JHU blues -->
+                            <rect x="40" y="40" width="30" height="30" fill="#001F4D" />
+                            <rect x="70" y="40" width="30" height="30" fill="#002D72" />
+                            <rect x="100" y="40" width="30" height="30" fill="#005EB8" />
+                            <rect x="130" y="40" width="30" height="30" fill="#68ACE5" />
+                            
+                            <rect x="40" y="70" width="30" height="30" fill="#002D72" />
+                            <rect x="70" y="70" width="30" height="30" fill="#005EB8" />
+                            <rect x="100" y="70" width="30" height="30" fill="#68ACE5" />
+                            <rect x="130" y="70" width="30" height="30" fill="#A5CEF0" />
+                            
+                            <rect x="40" y="100" width="30" height="30" fill="#D1E5F0" />
+                            <rect x="70" y="100" width="30" height="30" fill="#A5CEF0" />
+                            <rect x="100" y="100" width="30" height="30" fill="#68ACE5" />
+                            <rect x="130" y="100" width="30" height="30" fill="#005EB8" />
+                            
+                            <rect x="40" y="130" width="30" height="30" fill="#A5CEF0" />
+                            <rect x="70" y="130" width="30" height="30" fill="#68ACE5" />
+                            <rect x="100" y="130" width="30" height="30" fill="#005EB8" />
+                            <rect x="130" y="130" width="30" height="30" fill="#001F4D" />
+                            
+                            <!-- Legend -->
+                            <rect x="170" y="40" width="10" height="10" fill="#001F4D" />
+                            <rect x="170" y="55" width="10" height="10" fill="#005EB8" />
+                            <rect x="170" y="70" width="10" height="10" fill="#68ACE5" />
+                            <rect x="170" y="85" width="10" height="10" fill="#A5CEF0" />
+                            <rect x="170" y="100" width="10" height="10" fill="#D1E5F0" />
+                            
+                            <text x="185" y="48" font-size="8" text-anchor="start">Low</text>
+                            <text x="185" y="103" font-size="8" text-anchor="start">High</text>
+                        </svg>
+                    </div>
+                    <div class="molecule-content">
+                        <h3>Property Heatmaps</h3>
+                        <p>Visualize molecular properties using heatmaps to identify structure-property relationships.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <h2>Code Example</h2>
+            </div>
+            
+            <div class="code-block">
+                <pre>
+# Import molecular design platform modules
+from molecular_design.core import Molecule
+from molecular_design.prediction import PropertyCalculator
+from molecular_design.optimization import Optimizer
+
+# Load a molecule from SMILES notation
+molecule = Molecule.from_smiles("CC(=O)OC1=CC=CC=C1C(=O)O")
+
+# Calculate molecular properties
+properties = PropertyCalculator.calculate(molecule, 
+                                         properties=["logP", "TPSA", "HBA", "HBD"])
+print(f"LogP: {properties['logP']}")
+print(f"TPSA: {properties['TPSA']} Å²")
+
+# Define optimization objective
+def objective_function(mol):
+    props = PropertyCalculator.calculate(mol, properties=["logP", "TPSA"])
+    # Optimize for oral bioavailability
+    score = 0
+    if 1 < props["logP"] < 5:
+        score += 1
+    if props["TPSA"] < 140:
+        score += 1
+    return score
+
+# Run optimization
+optimizer = Optimizer(objective_function)
+optimized_molecules = optimizer.optimize(molecule, 
+                                        num_iterations=100,
+                                        population_size=50)
+
+# Get the best molecule
+best_molecule = optimized_molecules[0]
+print(f"Best molecule SMILES: {best_molecule.to_smiles()}")
+                </pre>
+            </div>
+        </div>
+    </section>
+    
+    <section style="background-color: var(--jhu-light-gray);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Applications</h2>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">💊</div>
+                    <div class="feature-content">
+                        <h3>Drug Discovery</h3>
+                        <p>Design novel drug candidates with optimized pharmacokinetic properties and target binding.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔋</div>
+                    <div class="feature-content">
+                        <h3>Materials Science</h3>
+                        <p>Develop new materials with tailored properties for energy storage, catalysis, and electronics.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌱</div>
+                    <div class="feature-content">
+                        <h3>Agrochemicals</h3>
+                        <p>Create environmentally friendly pesticides and fertilizers with improved efficacy and safety profiles.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🧩</div>
+                    <div class="feature-content">
+                        <h3>Fragment-Based Design</h3>
+                        <p>Build molecules from smaller fragments to explore chemical space more efficiently.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="jhu-citation">
+        <div class="container">
+            <p style="text-align: center; font-size: 0.9rem; color: var(--jhu-gray);">
+                Research supported by the Johns Hopkins University Department of Chemical & Biomolecular Engineering.
+                <br>For more information, visit <a href="https://engineering.jhu.
